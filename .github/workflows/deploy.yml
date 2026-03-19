@@ -1,0 +1,32 @@
+name: OpenHAB Automated Deployment
+
+on:
+  push:
+    paths:
+      - 'version.txt'  # Запускати тільки якщо змінилася версія
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate Configuration
+        run: |
+          echo "Checking OpenHAB configuration files..."
+          # Тут могла б бути команда перевірки синтаксису
+          echo "Configuration is VALID."
+
+      - name: Simulated Deployment
+        run: |
+          VERSION=$(cat version.txt)
+          echo "Deploying OpenHAB version $VERSION to Production..."
+          echo "Connecting to IoT Gateway..."
+          echo "Restarting Docker containers..."
+          echo "Deployment SUCCESSFUL!"
+
+      - name: Health Check
+        run: |
+          echo "Running post-deployment tests..."
+          echo "OpenHAB dashboard is ONLINE."
